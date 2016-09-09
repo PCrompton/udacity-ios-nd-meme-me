@@ -10,16 +10,17 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
-    
-    let topTextDefault = "TOP"
-    let bottomTextDefault = "BOTTOM"
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var topTextField: UITextField!
-    @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
     
+    let topTextDefault = "TOP"
+    let bottomTextDefault = "BOTTOM"
+
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),
         NSForegroundColorAttributeName : UIColor.whiteColor(),
@@ -33,62 +34,47 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let memedImage: UIImage
     }
     
-// MARK override functions
+// MARK: override functions
     
     override func viewDidLoad() {
-        print("\(self.dynamicType).viewDidLoad()")
         super.viewDidLoad()
         
-        self.topTextField.delegate = self
-        self.bottomTextField.delegate = self
+        topTextField.delegate = self
+        bottomTextField.delegate = self
         
-        self.topTextField.text = self.topTextDefault
-        self.bottomTextField.text = self.bottomTextDefault
+        topTextField.text = topTextDefault
+        bottomTextField.text = bottomTextDefault
         
-        self.topTextField.defaultTextAttributes = memeTextAttributes
-        self.bottomTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.defaultTextAttributes = memeTextAttributes
         
-        self.topTextField.textAlignment = NSTextAlignment.Center
-        self.bottomTextField.textAlignment = NSTextAlignment.Center
+        topTextField.textAlignment = NSTextAlignment.Center
+        bottomTextField.textAlignment = NSTextAlignment.Center
         
-        view.backgroundColor = UIColor.clearColor()
-        self.setNeedsStatusBarAppearanceUpdate()
-        self.childViewControllerForStatusBarHidden()
-        //topToolbar.hidden = true
-
-    
     }
 
     override func viewWillAppear(animated: Bool) {
-        
-        print("\(self.dynamicType).viewWillAppear() called")
-        
         super.viewWillAppear(true)
-        if imageView.image != nil {
-            shareButton.enabled = true
-        } else {
-            shareButton.enabled = false
+        if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            cameraButton.enabled = false
         }
-        
-        
-
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(true)
-        
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
 
+// MARK: Meme functions
+    
     func generateMemedImage() -> UIImage {
        
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawViewHierarchyInRect(self.view.frame,
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawViewHierarchyInRect(view.frame,
                                      afterScreenUpdates: true)
 
         let memedImage : UIImage =
             UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
         
         return memedImage
     }
@@ -100,14 +86,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func saveMeme() -> Meme {
         
-        hideToolbars(true)
         let previousColor = view.backgroundColor
         view.backgroundColor = UIColor.blackColor()
+        hideToolbars(true)
         
         let meme = Meme.init(text: ["top": topTextField.text!, "bottom": bottomTextField.text!], originalImage: imageView.image!, memedImage: generateMemedImage())
         
-        hideToolbars(false)
         view.backgroundColor = previousColor
+        hideToolbars(false)
 
         return meme
     }
@@ -154,7 +140,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        print("\(self.dynamicType).imagePickerControllerDidCancel(\(picker)) called")
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -162,7 +147,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 // MARK textFieldDelegate functions
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        print("\(self.dynamicType).textFieldDidBeginEditing()")
         
         if textField === self.bottomTextField {
             subscribeToKeyboardNotifications()
@@ -180,7 +164,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         return textField.text == topTextDefault || textField.text == bottomTextDefault ? true: false
     }
-    
 
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -227,6 +210,4 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
-    
-    
 }

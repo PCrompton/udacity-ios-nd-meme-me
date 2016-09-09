@@ -1,106 +1,110 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="c3y-gR-Ec7">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <scene sceneID="Tdt-Lm-oR5">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeEditorViewController" id="c3y-gR-Ec7" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="CyO-a7-3gN"/>
+                        <viewControllerLayoutGuide type="bottom" id="gQS-K0-Mq0"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="mAv-gE-qTW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sK3-eM-CUU" userLabel="Inner View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s78-Mc-czs" userLabel="Inner View">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2pH-Pe-Jy1">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fdh-Ob-2Pc">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="2pH-Pe-Jy1" firstAttribute="height" secondItem="sK3-eM-CUU" secondAttribute="height" id="Mxv-Gp-t4V"/>
-                                    <constraint firstItem="2pH-Pe-Jy1" firstAttribute="width" secondItem="sK3-eM-CUU" secondAttribute="width" id="Qnk-Yo-M1x"/>
-                                    <constraint firstItem="2pH-Pe-Jy1" firstAttribute="centerX" secondItem="sK3-eM-CUU" secondAttribute="centerX" id="ch2-C7-AaG" userLabel="Image View.centerX = Inner View.centerX"/>
-                                    <constraint firstItem="2pH-Pe-Jy1" firstAttribute="centerY" secondItem="sK3-eM-CUU" secondAttribute="centerY" id="zJ3-7V-eEj" userLabel="Image View.centerY = centerY"/>
+                                    <constraint firstItem="fdh-Ob-2Pc" firstAttribute="centerY" secondItem="s78-Mc-czs" secondAttribute="centerY" id="HMO-2j-HFV" userLabel="Image View.centerY = centerY"/>
+                                    <constraint firstItem="fdh-Ob-2Pc" firstAttribute="height" secondItem="s78-Mc-czs" secondAttribute="height" id="Xzu-ax-m6s"/>
+                                    <constraint firstItem="fdh-Ob-2Pc" firstAttribute="centerX" secondItem="s78-Mc-czs" secondAttribute="centerX" id="YEl-Id-rLs" userLabel="Image View.centerX = Inner View.centerX"/>
+                                    <constraint firstItem="fdh-Ob-2Pc" firstAttribute="width" secondItem="s78-Mc-czs" secondAttribute="width" id="x58-fW-bpQ"/>
                                 </constraints>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="we1-hk-DiZ" userLabel="Top Toolbar">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EPM-2a-xPo" userLabel="Top Toolbar">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem systemItem="action" id="FJE-x7-7ts">
+                                    <barButtonItem systemItem="action" id="QBp-jj-kvH">
                                         <connections>
-                                            <action selector="shareMeme:" destination="BYZ-38-t0r" id="rqM-u4-hKa"/>
+                                            <action selector="shareMeme:" destination="c3y-gR-Ec7" id="ea4-PM-vvg"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Top" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bek-iI-T8e" userLabel="Text Field Top">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Top" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9to-zc-nJs" userLabel="Text Field Top">
                                 <rect key="frame" x="0.0" y="96" width="600" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Bottom" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Oxz-FV-3fz" userLabel="Text Field Bottom">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Bottom" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Y8s-wo-UZe" userLabel="Text Field Bottom">
                                 <rect key="frame" x="-1" y="507" width="601" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcq-bd-sjx" userLabel="Bottom Toolbar">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uS-Ed-WNE" userLabel="Bottom Toolbar">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem title="Photos" id="71X-vI-xo8">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="8fd-HU-CRj"/>
+                                    <barButtonItem tag="1" systemItem="camera" id="2xJ-Rs-5KW">
                                         <connections>
-                                            <action selector="pickAnImage:" destination="BYZ-38-t0r" id="X6R-tI-J39"/>
+                                            <action selector="pickAnImage:" destination="c3y-gR-Ec7" id="iz4-G6-UGb"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem tag="1" title="Camera" systemItem="camera" id="giF-Rc-iK7">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="bK3-RN-bwk"/>
+                                    <barButtonItem title="Photos" id="chv-zo-fDE">
                                         <connections>
-                                            <action selector="pickAnImage:" destination="BYZ-38-t0r" id="SIH-bw-2PK"/>
+                                            <action selector="pickAnImage:" destination="c3y-gR-Ec7" id="FcW-SL-4SC"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Zv2-f7-Gx5"/>
                                 </items>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bek-iI-T8e" firstAttribute="centerX" secondItem="we1-hk-DiZ" secondAttribute="centerX" id="5Ig-9S-UNN" userLabel="Text Field Top.centerX = centerX"/>
-                            <constraint firstItem="bek-iI-T8e" firstAttribute="width" secondItem="2pH-Pe-Jy1" secondAttribute="width" id="Npa-27-W7y"/>
-                            <constraint firstItem="gcq-bd-sjx" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Umj-51-PwF"/>
-                            <constraint firstItem="sK3-eM-CUU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VxP-o5-LEr"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sK3-eM-CUU" secondAttribute="bottom" id="XOi-93-neW"/>
-                            <constraint firstItem="Oxz-FV-3fz" firstAttribute="width" secondItem="sK3-eM-CUU" secondAttribute="width" id="Xu4-bh-75V"/>
-                            <constraint firstItem="Oxz-FV-3fz" firstAttribute="centerX" secondItem="gcq-bd-sjx" secondAttribute="centerX" id="bu4-va-Adm"/>
-                            <constraint firstItem="gcq-bd-sjx" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="dE7-2k-SLU"/>
-                            <constraint firstItem="we1-hk-DiZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eN7-Fc-Apb"/>
-                            <constraint firstItem="gcq-bd-sjx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fyf-A9-7KE"/>
-                            <constraint firstItem="sK3-eM-CUU" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="ngH-OM-zF4"/>
-                            <constraint firstItem="sK3-eM-CUU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="sBY-hF-xPS"/>
-                            <constraint firstItem="we1-hk-DiZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="tYf-99-zcf"/>
-                            <constraint firstItem="gcq-bd-sjx" firstAttribute="top" secondItem="Oxz-FV-3fz" secondAttribute="bottom" constant="32" id="vXj-5X-JCE" userLabel="Text Field Bottom.bottom = Inner View.bottom + 76"/>
-                            <constraint firstItem="bek-iI-T8e" firstAttribute="top" secondItem="we1-hk-DiZ" secondAttribute="bottom" constant="32" id="xki-vF-S3w" userLabel="Text Field Top.top = Inner View.top + 76"/>
-                            <constraint firstItem="we1-hk-DiZ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="z8O-6u-1kd"/>
+                            <constraint firstItem="s78-Mc-czs" firstAttribute="top" secondItem="CyO-a7-3gN" secondAttribute="bottom" id="C9Q-h1-aCT"/>
+                            <constraint firstItem="1uS-Ed-WNE" firstAttribute="width" secondItem="mAv-gE-qTW" secondAttribute="width" id="F4u-LG-iOO"/>
+                            <constraint firstItem="9to-zc-nJs" firstAttribute="width" secondItem="fdh-Ob-2Pc" secondAttribute="width" id="KN9-Kw-RVM"/>
+                            <constraint firstItem="EPM-2a-xPo" firstAttribute="centerX" secondItem="mAv-gE-qTW" secondAttribute="centerX" id="Lzc-aE-eVo"/>
+                            <constraint firstItem="gQS-K0-Mq0" firstAttribute="top" secondItem="s78-Mc-czs" secondAttribute="bottom" id="OJG-Y0-bh9"/>
+                            <constraint firstItem="EPM-2a-xPo" firstAttribute="width" secondItem="mAv-gE-qTW" secondAttribute="width" id="Yf5-Rv-3gP"/>
+                            <constraint firstItem="1uS-Ed-WNE" firstAttribute="bottom" secondItem="gQS-K0-Mq0" secondAttribute="top" id="Z4W-Ap-4Ct"/>
+                            <constraint firstItem="Y8s-wo-UZe" firstAttribute="centerX" secondItem="1uS-Ed-WNE" secondAttribute="centerX" id="ZoT-Fz-FgV"/>
+                            <constraint firstItem="9to-zc-nJs" firstAttribute="top" secondItem="EPM-2a-xPo" secondAttribute="bottom" constant="32" identifier="TextFieldVertical" id="c3a-xZ-mIr" userLabel="Text Field Top.top = Inner View.top + 76"/>
+                            <constraint firstItem="1uS-Ed-WNE" firstAttribute="top" secondItem="Y8s-wo-UZe" secondAttribute="bottom" constant="32" identifier="TextFieldVertical" id="gCe-DB-ZOg" userLabel="Text Field Bottom.bottom = Inner View.bottom + 76"/>
+                            <constraint firstItem="s78-Mc-czs" firstAttribute="centerX" secondItem="mAv-gE-qTW" secondAttribute="centerX" id="jYy-ne-usF"/>
+                            <constraint firstItem="9to-zc-nJs" firstAttribute="centerX" secondItem="EPM-2a-xPo" secondAttribute="centerX" id="kNv-Px-mFb" userLabel="Text Field Top.centerX = centerX"/>
+                            <constraint firstItem="1uS-Ed-WNE" firstAttribute="centerX" secondItem="mAv-gE-qTW" secondAttribute="centerX" id="q8a-sn-M47"/>
+                            <constraint firstItem="EPM-2a-xPo" firstAttribute="top" secondItem="CyO-a7-3gN" secondAttribute="bottom" id="sC9-ck-UpX"/>
+                            <constraint firstItem="s78-Mc-czs" firstAttribute="width" secondItem="mAv-gE-qTW" secondAttribute="width" id="vcA-mK-BIl"/>
+                            <constraint firstItem="Y8s-wo-UZe" firstAttribute="width" secondItem="s78-Mc-czs" secondAttribute="width" id="zRN-ho-ACG"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bottomTextField" destination="Oxz-FV-3fz" id="tqY-0n-eRd"/>
-                        <outlet property="bottomToolbar" destination="gcq-bd-sjx" id="tW1-de-w51"/>
-                        <outlet property="imageView" destination="2pH-Pe-Jy1" id="1Gl-mL-IvF"/>
-                        <outlet property="shareButton" destination="FJE-x7-7ts" id="dAu-NN-IrQ"/>
-                        <outlet property="topTextField" destination="bek-iI-T8e" id="prQ-z7-2Eo"/>
-                        <outlet property="topToolbar" destination="we1-hk-DiZ" id="7js-45-IID"/>
+                        <outlet property="bottomTextField" destination="Y8s-wo-UZe" id="JS7-9Y-1kU"/>
+                        <outlet property="bottomToolbar" destination="1uS-Ed-WNE" id="oua-3t-IUR"/>
+                        <outlet property="cameraButton" destination="2xJ-Rs-5KW" id="DiI-h1-TEE"/>
+                        <outlet property="imageView" destination="fdh-Ob-2Pc" id="XFv-O8-7q2"/>
+                        <outlet property="shareButton" destination="QBp-jj-kvH" id="eET-1g-ULJ"/>
+                        <outlet property="topTextField" destination="9to-zc-nJs" id="9Pv-gW-UOb"/>
+                        <outlet property="topToolbar" destination="EPM-2a-xPo" id="TRW-bK-MK6"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YAM-R6-OAH" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="245" y="177"/>
+            <point key="canvasLocation" x="421" y="-751"/>
         </scene>
     </scenes>
 </document>
