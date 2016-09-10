@@ -28,13 +28,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         NSStrokeWidthAttributeName : -1.0
     ]
     
-    struct Meme {
-        let TopText: String
-        let BottomText: String
-        let originalImage: UIImage
-        let memedImage: UIImage
-    }
-    
 // MARK: override functions
     
     func configureTextField(textField: UITextField, defaultText: String) {
@@ -61,6 +54,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return true
     }
 
+    @IBAction func dismiss(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 // MARK: Meme functions
     
     func generateMemedImage() -> UIImage {
@@ -87,9 +83,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         bottomToolbar.hidden = hidden
     }
     
-    func save() -> Meme {
+    func save() {
         let meme = Meme.init(TopText: topTextField.text!, BottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
-        return meme
+        let appDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        appDelegate.memes.append(meme)
     }
 
     @IBAction func shareMeme(sender: AnyObject) {
