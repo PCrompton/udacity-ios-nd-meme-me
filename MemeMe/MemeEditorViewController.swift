@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MemeEditorViewController.swift
 //  MemeMe
 //
 //  Created by Paul Crompton on 7/18/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var shareButton: UIBarButtonItem!
@@ -20,7 +20,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     let topTextDefault = "TOP"
     let bottomTextDefault = "BOTTOM"
-
+    
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),
         NSForegroundColorAttributeName : UIColor.whiteColor(),
@@ -29,28 +29,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     ]
     
     struct Meme {
-        let text: [String: String]
+        let TopText: String
+        let BottomText: String
         let originalImage: UIImage
         let memedImage: UIImage
     }
     
 // MARK: override functions
     
+    func configureTextField(textField: UITextField, defaultText: String) {
+        textField.delegate = self
+        textField.text = defaultText
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = NSTextAlignment.Center
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        topTextField.delegate = self
-        bottomTextField.delegate = self
-        
-        topTextField.text = topTextDefault
-        bottomTextField.text = bottomTextDefault
-        
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        
-        topTextField.textAlignment = NSTextAlignment.Center
-        bottomTextField.textAlignment = NSTextAlignment.Center
-        
+        configureTextField(topTextField, defaultText: topTextDefault)
+        configureTextField(bottomTextField, defaultText: bottomTextDefault)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -67,14 +64,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 // MARK: Meme functions
     
     func generateMemedImage() -> UIImage {
-       
+        
+        let previousColor = view.backgroundColor
+        view.backgroundColor = UIColor.blackColor()
+        hideToolbars(true)
+        
         UIGraphicsBeginImageContext(view.frame.size)
         view.drawViewHierarchyInRect(view.frame,
                                      afterScreenUpdates: true)
-
         let memedImage : UIImage =
             UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
+        view.backgroundColor = previousColor
+        hideToolbars(false)
         
         return memedImage
     }
@@ -84,26 +87,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomToolbar.hidden = hidden
     }
     
-    func saveMeme() -> Meme {
-        
-        let previousColor = view.backgroundColor
-        view.backgroundColor = UIColor.blackColor()
-        hideToolbars(true)
-        
-        let meme = Meme.init(text: ["top": topTextField.text!, "bottom": bottomTextField.text!], originalImage: imageView.image!, memedImage: generateMemedImage())
-        
-        view.backgroundColor = previousColor
-        hideToolbars(false)
-
+    func save() -> Meme {
+        let meme = Meme.init(TopText: topTextField.text!, BottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
         return meme
     }
 
     @IBAction func shareMeme(sender: AnyObject) {
-        
-        let activityViewController = UIActivityViewController(activityItems: [self.saveMeme().memedImage], applicationActivities: nil)
+        let memedImage = generateMemedImage()
+        let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = {(activityType, completed, returnedItems, activityError) in
+            if completed {
+                self.save()
+            }
+        }
         
         presentViewController(activityViewController, animated: true, completion: nil)
-    
     }
 // MARK image controllers
     
@@ -200,9 +198,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func subscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func unsubscribeToKeyboardNotifications() {
