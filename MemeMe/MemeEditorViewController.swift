@@ -48,6 +48,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             cameraButton.enabled = false
         }
+        if (imageView.image == nil) {
+            shareButton.enabled = false
+        }
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -125,9 +128,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
         if let image = image {
-            self.imageView.image = image
+            imageView.image = image
+            shareButton.enabled = true
         } else {
-            self.imageView.image = nil
+            imageView.image = nil
         }
         
         imagePickerControllerDidCancel(picker)
