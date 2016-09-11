@@ -14,4 +14,6 @@ struct Meme {
     let BottomText: String
     let originalImage: UIImage
     let memedImage: UIImage
+    
+    static var memes = [Meme]()
 }

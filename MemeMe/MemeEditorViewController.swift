@@ -12,6 +12,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -50,6 +51,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
         if (imageView.image == nil) {
             shareButton.enabled = false
+            saveButton.enabled = false
         }
     }
     
@@ -57,7 +59,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return true
     }
 
-    @IBAction func dismiss(sender: AnyObject) {
+    @IBAction func dismiss() {
         dismissViewControllerAnimated(true, completion: nil)
     }
 // MARK: Meme functions
@@ -86,10 +88,19 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         bottomToolbar.hidden = hidden
     }
     
+    @IBAction func saveButton(sender: AnyObject) {
+        save()
+        dismiss()
+    }
     func save() {
         let meme = Meme.init(TopText: topTextField.text!, BottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
-        let appDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        appDelegate.memes.append(meme)
+        Meme.memes.append(meme)
+        
+        let tableViewController = self.presentingViewController?.childViewControllers[0].childViewControllers[0] as! MemeTableViewController
+        let collectionViewController = self.presentingViewController?.childViewControllers[0].childViewControllers[1] as! MemeCollectionViewController
+        tableViewController.reloadData()
+        collectionViewController.reloadData()
+
     }
 
     @IBAction func shareMeme(sender: AnyObject) {
@@ -130,6 +141,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         if let image = image {
             imageView.image = image
             shareButton.enabled = true
+            saveButton.enabled = true
         } else {
             imageView.image = nil
         }
@@ -151,11 +163,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             subscribeToKeyboardNotifications()
         }
         
-        
         if textFieldShouldClear(textField) {
             textField.text = ""
         }
-        
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
