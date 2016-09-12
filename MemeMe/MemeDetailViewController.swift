@@ -9,20 +9,14 @@
 import Foundation
 import UIKit
 
-class MemeDetailViewController: MemeViewController {
+class MemeDetailViewController: UIViewController {
+    var meme: Meme?
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
     override func viewDidLoad() {
         if let meme = meme {
             imageView.image = meme.memedImage
         }
-    }
-    
-    @IBAction func shareButton(sender: AnyObject) {
-        shareMeme(imageView.image!, completion: nil)
-    }
-
-    @IBAction func editButton(sender: AnyObject) {
-        let memeEditorViewController = storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
-        memeEditorViewController.meme = meme
-        dismissalDelegate?.dismissAndPresentNew(self, VCToPresent: memeEditorViewController)
     }
 }

@@ -9,16 +9,10 @@
 import Foundation
 import UIKit
 
-extension UIViewController: DismissalDelegate {
+extension UIViewController {
     func createAndPresentDetailVC(index: Int) {
         let memeDetailVC = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         memeDetailVC.meme = Meme.memes[index]
-        memeDetailVC.dismissalDelegate = self
-        presentViewController(memeDetailVC, animated: true, completion: nil)
-    }
-    
-    func dismissAndPresentNew(VCToDismiss: MemeDetailViewController, VCToPresent: MemeEditorViewController) {
-        VCToDismiss.dismissViewControllerAnimated(true, completion: nil)
-        presentViewController(VCToPresent, animated: true, completion: nil)
+        showViewController(memeDetailVC, sender: self)
     }
 }

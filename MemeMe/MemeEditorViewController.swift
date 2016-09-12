@@ -8,13 +8,16 @@
 
 import UIKit
 
-class MemeEditorViewController: MemeViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var imageView: UIImageView!
     
     let topTextDefault = "TOP"
     let bottomTextDefault = "BOTTOM"
@@ -25,6 +28,8 @@ class MemeEditorViewController: MemeViewController, UIImagePickerControllerDeleg
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSStrokeWidthAttributeName : -1.0
     ]
+    
+    var meme: Meme?
     
 // MARK: override functions
     
@@ -60,6 +65,10 @@ class MemeEditorViewController: MemeViewController, UIImagePickerControllerDeleg
             shareButton.enabled = false
             saveButton.enabled = false
         }
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
 // MARK: Meme functions
@@ -108,6 +117,16 @@ class MemeEditorViewController: MemeViewController, UIImagePickerControllerDeleg
             if completed {
                 self.save()
             }}
+    }
+    
+    @IBAction func dismiss() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func shareMeme(memedImage: UIImage, completion: ((String?, Bool, [AnyObject]?, NSError?) -> Void)?) {
+        let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = completion
+        presentViewController(activityViewController, animated: true, completion: nil)
     }
 
 // MARK image controllers
