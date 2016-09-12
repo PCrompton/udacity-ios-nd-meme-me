@@ -8,12 +8,9 @@
 
 import UIKit
 
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: MemeViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
@@ -31,17 +28,27 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
 // MARK: override functions
     
-    func configureTextField(textField: UITextField, defaultText: String) {
+    func configureTextField(textField: UITextField, text: String) {
         textField.delegate = self
-        textField.text = defaultText
+        textField.text = text
         textField.defaultTextAttributes = memeTextAttributes
         textField.textAlignment = NSTextAlignment.Center
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTextField(topTextField, defaultText: topTextDefault)
-        configureTextField(bottomTextField, defaultText: bottomTextDefault)
+        let topText: String
+        let bottomText: String
+        if let meme = meme {
+            imageView.image = meme.originalImage
+            topText = meme.TopText
+            bottomText = meme.BottomText
+        } else {
+            topText = topTextDefault
+            bottomText = bottomTextDefault
+        }
+        configureTextField(topTextField, text: topText)
+        configureTextField(bottomTextField, text: bottomText)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -55,13 +62,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-
-    @IBAction func dismiss() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
 // MARK: Meme functions
     
     func generateMemedImage() -> UIImage {
@@ -95,25 +95,21 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func save() {
         let meme = Meme.init(TopText: topTextField.text!, BottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
         Meme.memes.append(meme)
-        
+        print(self.navigationController)
         let tableViewController = self.presentingViewController?.childViewControllers[0].childViewControllers[0] as! MemeTableViewController
         let collectionViewController = self.presentingViewController?.childViewControllers[0].childViewControllers[1] as! MemeCollectionViewController
         tableViewController.reloadData()
         collectionViewController.reloadData()
 
     }
-
-    @IBAction func shareMeme(sender: AnyObject) {
-        let memedImage = generateMemedImage()
-        let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = {(activityType, completed, returnedItems, activityError) in
+    
+    @IBAction func shareButton(sender: AnyObject) {
+        shareMeme(generateMemedImage()) { (activityType, completed, returnedItems, activityError) in
             if completed {
                 self.save()
-            }
-        }
-        
-        presentViewController(activityViewController, animated: true, completion: nil)
+            }}
     }
+
 // MARK image controllers
     
     @IBAction func pickAnImage(sender: AnyObject) {

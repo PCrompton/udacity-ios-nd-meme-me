@@ -67,36 +67,42 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EPM-2a-xPo" userLabel="Top Toolbar">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <items>
+                                            <barButtonItem systemItem="action" id="QBp-jj-kvH">
+                                                <connections>
+                                                    <action selector="shareButton:" destination="c3y-gR-Ec7" id="M24-Pz-Lrq"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Save" id="WXh-gi-16f">
+                                                <connections>
+                                                    <action selector="saveButton:" destination="c3y-gR-Ec7" id="4c6-xY-5HM"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="98l-ZT-Tge"/>
+                                            <barButtonItem systemItem="cancel" id="7cg-Sq-HYb">
+                                                <connections>
+                                                    <action selector="dismiss" destination="c3y-gR-Ec7" id="dou-9o-3IP"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="fdh-Ob-2Pc" firstAttribute="height" secondItem="s78-Mc-czs" secondAttribute="height" id="8Qs-7Z-jd2"/>
+                                    <constraint firstItem="fdh-Ob-2Pc" firstAttribute="width" secondItem="s78-Mc-czs" secondAttribute="width" id="DDw-TN-6c7"/>
+                                    <constraint firstItem="fdh-Ob-2Pc" firstAttribute="centerX" secondItem="s78-Mc-czs" secondAttribute="centerX" id="HDO-O1-auj"/>
                                     <constraint firstItem="fdh-Ob-2Pc" firstAttribute="centerY" secondItem="s78-Mc-czs" secondAttribute="centerY" id="HMO-2j-HFV" userLabel="Image View.centerY = centerY"/>
                                     <constraint firstItem="fdh-Ob-2Pc" firstAttribute="height" secondItem="s78-Mc-czs" secondAttribute="height" id="Xzu-ax-m6s"/>
                                     <constraint firstItem="fdh-Ob-2Pc" firstAttribute="centerX" secondItem="s78-Mc-czs" secondAttribute="centerX" id="YEl-Id-rLs" userLabel="Image View.centerX = Inner View.centerX"/>
+                                    <constraint firstItem="EPM-2a-xPo" firstAttribute="centerX" secondItem="s78-Mc-czs" secondAttribute="centerX" id="YlA-ia-jpY"/>
+                                    <constraint firstItem="EPM-2a-xPo" firstAttribute="top" secondItem="s78-Mc-czs" secondAttribute="top" id="hCA-G9-hBP"/>
+                                    <constraint firstItem="EPM-2a-xPo" firstAttribute="width" secondItem="s78-Mc-czs" secondAttribute="width" id="rua-Fj-n1I"/>
                                     <constraint firstItem="fdh-Ob-2Pc" firstAttribute="width" secondItem="s78-Mc-czs" secondAttribute="width" id="x58-fW-bpQ"/>
                                 </constraints>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EPM-2a-xPo" userLabel="Top Toolbar">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem systemItem="action" id="QBp-jj-kvH">
-                                        <connections>
-                                            <action selector="shareMeme:" destination="c3y-gR-Ec7" id="ea4-PM-vvg"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Save" id="WXh-gi-16f">
-                                        <connections>
-                                            <action selector="saveButton:" destination="c3y-gR-Ec7" id="HLp-fT-Xfb"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="98l-ZT-Tge"/>
-                                    <barButtonItem systemItem="cancel" id="Ad3-fK-GkQ">
-                                        <connections>
-                                            <action selector="dismiss:" destination="c3y-gR-Ec7" id="x8u-uY-okI"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Top" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9to-zc-nJs" userLabel="Text Field Top">
                                 <rect key="frame" x="0.0" y="96" width="600" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -113,13 +119,13 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="8fd-HU-CRj"/>
                                     <barButtonItem tag="1" systemItem="camera" id="2xJ-Rs-5KW">
                                         <connections>
-                                            <action selector="pickAnImage:" destination="c3y-gR-Ec7" id="iz4-G6-UGb"/>
+                                            <action selector="pickAnImage:" destination="c3y-gR-Ec7" id="daV-gh-1b3"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="bK3-RN-bwk"/>
                                     <barButtonItem title="Photos" id="chv-zo-fDE">
                                         <connections>
-                                            <action selector="pickAnImage:" destination="c3y-gR-Ec7" id="FcW-SL-4SC"/>
+                                            <action selector="pickAnImage:" destination="c3y-gR-Ec7" id="jfu-kO-YGT"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Zv2-f7-Gx5"/>
@@ -130,36 +136,33 @@
                         <constraints>
                             <constraint firstItem="s78-Mc-czs" firstAttribute="top" secondItem="CyO-a7-3gN" secondAttribute="bottom" id="C9Q-h1-aCT"/>
                             <constraint firstItem="1uS-Ed-WNE" firstAttribute="width" secondItem="mAv-gE-qTW" secondAttribute="width" id="F4u-LG-iOO"/>
+                            <constraint firstItem="9to-zc-nJs" firstAttribute="top" secondItem="CyO-a7-3gN" secondAttribute="bottom" constant="76" id="HKi-ey-0eb"/>
                             <constraint firstItem="9to-zc-nJs" firstAttribute="width" secondItem="fdh-Ob-2Pc" secondAttribute="width" id="KN9-Kw-RVM"/>
-                            <constraint firstItem="EPM-2a-xPo" firstAttribute="centerX" secondItem="mAv-gE-qTW" secondAttribute="centerX" id="Lzc-aE-eVo"/>
                             <constraint firstItem="gQS-K0-Mq0" firstAttribute="top" secondItem="s78-Mc-czs" secondAttribute="bottom" id="OJG-Y0-bh9"/>
-                            <constraint firstItem="EPM-2a-xPo" firstAttribute="width" secondItem="mAv-gE-qTW" secondAttribute="width" id="Yf5-Rv-3gP"/>
                             <constraint firstItem="1uS-Ed-WNE" firstAttribute="bottom" secondItem="gQS-K0-Mq0" secondAttribute="top" id="Z4W-Ap-4Ct"/>
                             <constraint firstItem="Y8s-wo-UZe" firstAttribute="centerX" secondItem="1uS-Ed-WNE" secondAttribute="centerX" id="ZoT-Fz-FgV"/>
-                            <constraint firstItem="9to-zc-nJs" firstAttribute="top" secondItem="EPM-2a-xPo" secondAttribute="bottom" constant="32" identifier="TextFieldVertical" id="c3a-xZ-mIr" userLabel="Text Field Top.top = Inner View.top + 76"/>
                             <constraint firstItem="1uS-Ed-WNE" firstAttribute="top" secondItem="Y8s-wo-UZe" secondAttribute="bottom" constant="32" identifier="TextFieldVertical" id="gCe-DB-ZOg" userLabel="Text Field Bottom.bottom = Inner View.bottom + 76"/>
                             <constraint firstItem="s78-Mc-czs" firstAttribute="centerX" secondItem="mAv-gE-qTW" secondAttribute="centerX" id="jYy-ne-usF"/>
-                            <constraint firstItem="9to-zc-nJs" firstAttribute="centerX" secondItem="EPM-2a-xPo" secondAttribute="centerX" id="kNv-Px-mFb" userLabel="Text Field Top.centerX = centerX"/>
+                            <constraint firstItem="9to-zc-nJs" firstAttribute="leading" secondItem="1uS-Ed-WNE" secondAttribute="leading" id="nGE-EF-bjs"/>
                             <constraint firstItem="1uS-Ed-WNE" firstAttribute="centerX" secondItem="mAv-gE-qTW" secondAttribute="centerX" id="q8a-sn-M47"/>
-                            <constraint firstItem="EPM-2a-xPo" firstAttribute="top" secondItem="CyO-a7-3gN" secondAttribute="bottom" id="sC9-ck-UpX"/>
                             <constraint firstItem="s78-Mc-czs" firstAttribute="width" secondItem="mAv-gE-qTW" secondAttribute="width" id="vcA-mK-BIl"/>
                             <constraint firstItem="Y8s-wo-UZe" firstAttribute="width" secondItem="s78-Mc-czs" secondAttribute="width" id="zRN-ho-ACG"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bottomTextField" destination="Y8s-wo-UZe" id="JS7-9Y-1kU"/>
-                        <outlet property="bottomToolbar" destination="1uS-Ed-WNE" id="oua-3t-IUR"/>
-                        <outlet property="cameraButton" destination="2xJ-Rs-5KW" id="DiI-h1-TEE"/>
-                        <outlet property="imageView" destination="fdh-Ob-2Pc" id="XFv-O8-7q2"/>
-                        <outlet property="saveButton" destination="WXh-gi-16f" id="9tH-Fi-rUR"/>
-                        <outlet property="shareButton" destination="QBp-jj-kvH" id="eET-1g-ULJ"/>
-                        <outlet property="topTextField" destination="9to-zc-nJs" id="9Pv-gW-UOb"/>
-                        <outlet property="topToolbar" destination="EPM-2a-xPo" id="TRW-bK-MK6"/>
+                        <outlet property="bottomTextField" destination="Y8s-wo-UZe" id="3MB-NO-vH2"/>
+                        <outlet property="bottomToolbar" destination="1uS-Ed-WNE" id="0gf-ox-4Wa"/>
+                        <outlet property="cameraButton" destination="2xJ-Rs-5KW" id="a42-1h-nZa"/>
+                        <outlet property="imageView" destination="fdh-Ob-2Pc" id="gn0-qc-tH1"/>
+                        <outlet property="saveButton" destination="WXh-gi-16f" id="7xW-8x-UoM"/>
+                        <outlet property="shareButton" destination="QBp-jj-kvH" id="pQt-HW-LUH"/>
+                        <outlet property="topTextField" destination="9to-zc-nJs" id="p92-Sn-raf"/>
+                        <outlet property="topToolbar" destination="EPM-2a-xPo" id="tRb-Yy-m2z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAM-R6-OAH" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="689" y="-1000"/>
+            <point key="canvasLocation" x="-967" y="-113"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gJI-gs-GfF">
@@ -246,6 +249,77 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUL-ag-cXa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-231" y="-1341"/>
+        </scene>
+        <!--Meme Detail View Controller-->
+        <scene sceneID="lmG-H3-dij">
+            <objects>
+                <viewController storyboardIdentifier="MemeDetailViewController" id="Xpc-Hv-Ida" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5TG-KQ-FhM"/>
+                        <viewControllerLayoutGuide type="bottom" id="xCI-Oi-XxQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="afk-ju-yAt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6p-et-NX4" userLabel="Inner View">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ouE-PP-Qp6">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </imageView>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SV0-gJ-i03" userLabel="Top Toolbar">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <items>
+                                            <barButtonItem systemItem="action" id="5IJ-2S-xCH">
+                                                <connections>
+                                                    <action selector="shareButton:" destination="Xpc-Hv-Ida" id="9v5-bl-75A"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem systemItem="edit" id="10H-EH-BuX">
+                                                <connections>
+                                                    <action selector="editButton:" destination="Xpc-Hv-Ida" id="Ayq-Bj-PbA"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="gA1-l0-Yo7"/>
+                                            <barButtonItem systemItem="cancel" id="Mod-Rz-QRZ">
+                                                <connections>
+                                                    <action selector="dismiss" destination="Xpc-Hv-Ida" id="ALi-zK-Zm9"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="ouE-PP-Qp6" firstAttribute="centerY" secondItem="N6p-et-NX4" secondAttribute="centerY" id="1zJ-60-vK5" userLabel="Image View.centerY = centerY"/>
+                                    <constraint firstItem="ouE-PP-Qp6" firstAttribute="centerX" secondItem="N6p-et-NX4" secondAttribute="centerX" id="BPr-E9-upo" userLabel="Image View.centerX = Inner View.centerX"/>
+                                    <constraint firstItem="SV0-gJ-i03" firstAttribute="centerX" secondItem="N6p-et-NX4" secondAttribute="centerX" id="VaN-kH-Zn4"/>
+                                    <constraint firstItem="SV0-gJ-i03" firstAttribute="top" secondItem="N6p-et-NX4" secondAttribute="top" id="jH8-6w-r1x"/>
+                                    <constraint firstItem="SV0-gJ-i03" firstAttribute="width" secondItem="N6p-et-NX4" secondAttribute="width" id="jap-Nb-P77"/>
+                                    <constraint firstItem="ouE-PP-Qp6" firstAttribute="width" secondItem="N6p-et-NX4" secondAttribute="width" id="nmp-ai-gi1"/>
+                                    <constraint firstItem="ouE-PP-Qp6" firstAttribute="height" secondItem="N6p-et-NX4" secondAttribute="height" id="ybE-fy-Ee3"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="N6p-et-NX4" firstAttribute="top" secondItem="5TG-KQ-FhM" secondAttribute="bottom" id="6hY-Tv-hVs"/>
+                            <constraint firstItem="xCI-Oi-XxQ" firstAttribute="top" secondItem="N6p-et-NX4" secondAttribute="bottom" id="QN6-Yc-WRz"/>
+                            <constraint firstItem="N6p-et-NX4" firstAttribute="width" secondItem="afk-ju-yAt" secondAttribute="width" id="YEO-J3-Xf5"/>
+                            <constraint firstItem="N6p-et-NX4" firstAttribute="centerX" secondItem="afk-ju-yAt" secondAttribute="centerX" id="kDV-aA-ATy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="ouE-PP-Qp6" id="J0f-Hp-8ax"/>
+                        <outlet property="shareButton" destination="5IJ-2S-xCH" id="wNm-aR-1GQ"/>
+                        <outlet property="topToolbar" destination="SV0-gJ-i03" id="0CL-TZ-Lad"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eUd-Yq-mWm" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="483" y="-925"/>
         </scene>
     </scenes>
     <resources>

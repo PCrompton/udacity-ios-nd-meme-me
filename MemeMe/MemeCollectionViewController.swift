@@ -24,6 +24,7 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        createAndPresentDetailVC(indexPath.item)
     }
     
     func reloadData() {
