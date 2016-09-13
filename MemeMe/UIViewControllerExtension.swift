@@ -15,4 +15,10 @@ extension UIViewController {
         memeDetailVC.meme = Meme.memes[index]
         showViewController(memeDetailVC, sender: self)
     }
+    
+    func shareMeme(memedImage: UIImage, completion: ((String?, Bool, [AnyObject]?, NSError?) -> Void)?) {
+        let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = completion
+        presentViewController(activityViewController, animated: true, completion: nil)
+    }
 }

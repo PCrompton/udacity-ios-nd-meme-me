@@ -19,4 +19,16 @@ class MemeDetailViewController: UIViewController {
             imageView.image = meme.memedImage
         }
     }
+    
+    @IBAction func editButton(sender: AnyObject) {
+        let memeEditorVC = storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+        memeEditorVC.meme = meme
+        presentViewController(memeEditorVC, animated: true) {self.navigationController?.popToRootViewControllerAnimated(true)}
+    }
+    @IBAction func shareButton(sender: AnyObject) {
+        shareMeme(meme!.memedImage) { (activityType, completed, returnedItems, activityError) in
+            if completed {
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            }}
+    }
 }

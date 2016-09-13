@@ -21,14 +21,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     let topTextDefault = "TOP"
     let bottomTextDefault = "BOTTOM"
-    
-    let memeTextAttributes = [
-        NSStrokeColorAttributeName : UIColor.blackColor(),
-        NSForegroundColorAttributeName : UIColor.whiteColor(),
-        NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSStrokeWidthAttributeName : -1.0
-    ]
-    
+    let memeTextAttributes = TextAttributes()
     var meme: Meme?
     
 // MARK: override functions
@@ -36,7 +29,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func configureTextField(textField: UITextField, text: String) {
         textField.delegate = self
         textField.text = text
-        textField.defaultTextAttributes = memeTextAttributes
+        textField.defaultTextAttributes = memeTextAttributes.textAttributes
         textField.textAlignment = NSTextAlignment.Center
     }
     
@@ -46,8 +39,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let bottomText: String
         if let meme = meme {
             imageView.image = meme.originalImage
-            topText = meme.TopText
-            bottomText = meme.BottomText
+            topText = meme.topText
+            bottomText = meme.bottomText
         } else {
             topText = topTextDefault
             bottomText = bottomTextDefault
@@ -102,7 +95,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         dismiss()
     }
     func save() {
-        let meme = Meme.init(TopText: topTextField.text!, BottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
+        let meme = Meme.init(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
         Meme.memes.append(meme)
         print(self.navigationController)
         let tableViewController = self.presentingViewController?.childViewControllers[0].childViewControllers[0] as! MemeTableViewController
@@ -121,12 +114,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func dismiss() {
         dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func shareMeme(memedImage: UIImage, completion: ((String?, Bool, [AnyObject]?, NSError?) -> Void)?) {
-        let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = completion
-        presentViewController(activityViewController, animated: true, completion: nil)
     }
 
 // MARK image controllers
@@ -233,5 +220,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+}
+
+extension UIImagePickerController {
+    override public func prefersStatusBarHidden() -> Bool {
+        return true
     }
 }
