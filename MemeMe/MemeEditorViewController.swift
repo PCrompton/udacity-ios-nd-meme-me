@@ -26,11 +26,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
 // MARK: override functions
     
-    func configureTextField(textField: UITextField, text: String) {
+    func configureTextField(_ textField: UITextField, text: String) {
         textField.delegate = self
         textField.text = text
         textField.defaultTextAttributes = memeTextAttributes.textAttributes
-        textField.textAlignment = NSTextAlignment.Center
+        textField.textAlignment = NSTextAlignment.center
     }
     
     override func viewDidLoad() {
@@ -49,18 +49,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         configureTextField(bottomTextField, text: bottomText)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-            cameraButton.enabled = false
+        if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            cameraButton.isEnabled = false
         }
         if (imageView.image == nil) {
-            shareButton.enabled = false
-            saveButton.enabled = false
+            shareButton.isEnabled = false
+            saveButton.isEnabled = false
         }
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -69,14 +69,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func generateMemedImage() -> UIImage {
         
         let previousColor = view.backgroundColor
-        view.backgroundColor = UIColor.blackColor()
+        view.backgroundColor = UIColor.black
         hideToolbars(true)
         
         UIGraphicsBeginImageContext(view.frame.size)
-        view.drawViewHierarchyInRect(view.frame,
+        view.drawHierarchy(in: view.frame,
                                      afterScreenUpdates: true)
         let memedImage : UIImage =
-            UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
         view.backgroundColor = previousColor
@@ -85,12 +85,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return memedImage
     }
     
-    func hideToolbars(hidden: Bool) {
-        topToolbar.hidden = hidden
-        bottomToolbar.hidden = hidden
+    func hideToolbars(_ hidden: Bool) {
+        topToolbar.isHidden = hidden
+        bottomToolbar.isHidden = hidden
     }
     
-    @IBAction func saveButton(sender: AnyObject) {
+    @IBAction func saveButton(_ sender: AnyObject) {
         save()
         dismiss()
     }
@@ -105,26 +105,26 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
     }
     
-    @IBAction func shareButton(sender: AnyObject) {
-        shareMeme(generateMemedImage()) { (activityType, completed, returnedItems, activityError) in
+    @IBAction func shareButton(_ sender: AnyObject) {
+        shareMeme(memedImage: generateMemedImage()) { (activityType, completed, returnedItems, activityError) in
             if completed {
                 self.save()
             }}
     }
     
     @IBAction func dismiss() {
-        dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
 // MARK image controllers
     
-    @IBAction func pickAnImage(sender: AnyObject) {
+    @IBAction func pickAnImage(_ sender: AnyObject) {
         
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         
-        let camera = UIImagePickerControllerSourceType.Camera
-        let photoLibrary = UIImagePickerControllerSourceType.PhotoLibrary
+        let camera = UIImagePickerControllerSourceType.camera
+        let photoLibrary = UIImagePickerControllerSourceType.photoLibrary
         
         if sender.tag == 1 {
             imagePickerController.sourceType = camera
@@ -132,18 +132,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             imagePickerController.sourceType = photoLibrary
         }
         
-        presentViewController(imagePickerController, animated: true, completion: nil)
+        present(imagePickerController, animated: true, completion: nil)
         
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
         if let image = image {
             imageView.image = image
-            shareButton.enabled = true
-            saveButton.enabled = true
+            shareButton.isEnabled = true
+            saveButton.isEnabled = true
         } else {
             imageView.image = nil
         }
@@ -152,14 +152,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
  
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
     }
     
 
 // MARK textFieldDelegate functions
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField === self.bottomTextField {
             subscribeToKeyboardNotifications()
@@ -170,61 +170,61 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
     }
     
-    func textFieldShouldClear(textField: UITextField) -> Bool {
-        print("\(self.dynamicType).textFieldShouldClear()")
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        print("\(type(of: self)).textFieldShouldClear()")
         
         return textField.text == topTextDefault || textField.text == bottomTextDefault ? true: false
     }
 
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        print("\(self.dynamicType).textFieldShouldReturn()")
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("\(type(of: self)).textFieldShouldReturn()")
         textField.resignFirstResponder()
         return true
     }
     
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         unsubscribeToKeyboardNotifications()
     }
     
 // MARK keyboard show/hide
     
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Notification) {
         view.frame.origin.y -= getKeyboardHeight(notification)
-        topToolbar.hidden = true
-        topTextField.hidden = true
+        topToolbar.isHidden = true
+        topTextField.isHidden = true
         
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
         view.frame.origin.y += getKeyboardHeight(notification)
-        topToolbar.hidden = false
-        topTextField.hidden = false
+        topToolbar.isHidden = false
+        topTextField.isHidden = false
         
     }
     
-    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
-        let userInfo = notification.userInfo
+    func getKeyboardHeight(_ notification: Notification) -> CGFloat {
+        let userInfo = (notification as NSNotification).userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-        return keyboardSize.CGRectValue().height
+        return keyboardSize.cgRectValue.height
     }
     
     func subscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     func unsubscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 }
 
 extension UIImagePickerController {
-    override public func prefersStatusBarHidden() -> Bool {
+    override open var prefersStatusBarHidden : Bool {
         return true
     }
 }

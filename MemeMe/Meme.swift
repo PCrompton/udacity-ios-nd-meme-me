@@ -20,8 +20,8 @@ struct Meme {
 }
 
 struct TextAttributes {
-    var strokeColor = UIColor.blackColor()
-    var foregroundColor = UIColor.whiteColor()
+    var strokeColor = UIColor.black
+    var foregroundColor = UIColor.white
     var fontSize: CGFloat = 40
     var fontName = "HelveticaNeue-CondensedBlack"
     var strokeWidth = -4.0
@@ -37,7 +37,7 @@ struct TextAttributes {
             return [NSStrokeColorAttributeName: strokeColor,
                     NSForegroundColorAttributeName:foregroundColor,
                     NSFontAttributeName: font,
-                    NSStrokeWidthAttributeName: strokeWidth]
+                    NSStrokeWidthAttributeName: strokeWidth as AnyObject]
         }
     }
 }

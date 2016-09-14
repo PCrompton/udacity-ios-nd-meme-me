@@ -24,7 +24,7 @@ class MemeCollectionViewController: UICollectionViewController {
          configureFlowLayout(viewWidth: self.view.frame.width, viewHeight: self.view.frame.height)
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         let newWidth = self.view.frame.height
         let newHeight = self.view.frame.width
         configureFlowLayout(viewWidth: newWidth, viewHeight: newHeight)
@@ -41,18 +41,18 @@ class MemeCollectionViewController: UICollectionViewController {
         let dimension = (width - (CGFloat(numPerRow-1) * spaceBetweenItems)) / CGFloat(numPerRow)
         flowLayout.minimumInteritemSpacing = spaceBetweenItems
         flowLayout.minimumLineSpacing = spaceBetweenItems
-        flowLayout.itemSize = CGSizeMake(dimension, dimension)
+        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
 
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Meme.memes.count
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! MemeCollectionViewCell
-        let meme = Meme.memes[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MemeCollectionViewCell
+        let meme = Meme.memes[(indexPath as NSIndexPath).row]
         cell.memeImageView.image = meme.originalImage
         memeTextAttributes.fontSize = 25
         cell.topTextLabel.attributedText = NSAttributedString(string: meme.topText, attributes: memeTextAttributes.textAttributes)
@@ -60,8 +60,8 @@ class MemeCollectionViewController: UICollectionViewController {
         return cell
     }
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        createAndPresentDetailVC(indexPath.item)
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        createAndPresentDetailVC(index: (indexPath as NSIndexPath).item)
     }
     
     func reloadData() {

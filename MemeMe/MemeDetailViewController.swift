@@ -20,15 +20,15 @@ class MemeDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func editButton(sender: AnyObject) {
-        let memeEditorVC = storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+    @IBAction func editButton(_ sender: AnyObject) {
+        let memeEditorVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
         memeEditorVC.meme = meme
-        presentViewController(memeEditorVC, animated: true) {self.navigationController?.popToRootViewControllerAnimated(true)}
+        present(memeEditorVC, animated: true) {self.navigationController?.popToRootViewController(animated: true)}
     }
-    @IBAction func shareButton(sender: AnyObject) {
-        shareMeme(meme!.memedImage) { (activityType, completed, returnedItems, activityError) in
+    @IBAction func shareButton(_ sender: AnyObject) {
+        shareMeme(memedImage: meme!.memedImage) { (activityType, completed, returnedItems, activityError) in
             if completed {
-                self.navigationController?.popToRootViewControllerAnimated(true)
+                self.navigationController?.popToRootViewController(animated: true)
             }}
     }
 }
