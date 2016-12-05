@@ -97,7 +97,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func save() {
         let meme = Meme.init(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
         Meme.memes.append(meme)
-        print(self.navigationController)
         let tableViewController = self.presentingViewController?.childViewControllers[0].childViewControllers[0] as! MemeTableViewController
         let collectionViewController = self.presentingViewController?.childViewControllers[0].childViewControllers[1] as! MemeCollectionViewController
         tableViewController.reloadData()
